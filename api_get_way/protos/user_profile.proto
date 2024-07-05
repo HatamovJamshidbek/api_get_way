@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+option go_package = "/genproto";
+
+package protos;
+
+import "common.proto";
+
+message UserRequest {
+  string id = 1;
+  string userID = 2;                                                  
+  string fulname = 3;
+  string bio = 4;
+  string location = 5;
+  string avatarUrl = 6;
+  string website = 7;
+  string userRole = 8;
+  string updatedAt = 9;
+
+}
+
+
+
+message UserID {
+  string userID = 1;
+}
+
+message GetIDUserRespons {
+  string userID = 1; 
+  string fulname = 2;
+  string bio = 3;
+  string role = 4;
+  string location = 5;
+  string vavatarUrl = 6;
+  string website = 7;
+  string id = 8;
+}
+
+message FilterUser {
+  repeated GetIDUserRespons filterRespons = 1;
+}
+
+message UserFilter {
+  string userID = 1;                                                  
+  string fulname = 2;
+  string location = 3;
+  string updatedAt = 4;
+  string userRole = 5;
+  Filter GetUser = 6;
+}
+
+service UserProfilServer {
+  rpc CreateUserProfiles(UserRequest) returns (Void);  
+  rpc UpdateUserProfiles(UserRequest) returns (Void);
+  rpc DeleteUserProfiles(UserID) returns (Void);
+  rpc GetByUserID(UserID) returns (GetIDUserRespons);
+  rpc GetAllUser(UserFilter) returns (FilterUser);
+}
